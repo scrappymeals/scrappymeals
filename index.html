@@ -81,11 +81,14 @@
   .fridgie-headline {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-size: clamp(0.85rem, 3vw, 2.6rem);
     line-height: 1;
     text-transform: uppercase;
     letter-spacing: -0.01em;
     color: #1a1200;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .fridgie-sub {
@@ -110,10 +113,13 @@
   }
 
   @media (max-width: 600px) {
-    .fridgie-trigger { padding: 1rem 1rem; }
-    .fridgie-btn-img { height: 40px; }
-    .fridgie-icon { height: 52px; width: 52px; border-radius: 10px; }
-    .fridgie-headline { font-size: 1.1rem; }
+    .fridgie-trigger { padding: 0.6rem 0.75rem; }
+    .fridgie-trigger-inner { gap: 0.5rem; }
+    .fridgie-icon { height: 40px; width: 40px; border-radius: 8px; }
+    .fridgie-btn-img { height: 34px; }
+    .fridgie-headline { font-size: 0.85rem; line-height: 1.1; }
+    .fridgie-sub { font-size: 0.55rem; }
+    .fridgie-text { gap: 0.15rem; }
   }
 
   body {
