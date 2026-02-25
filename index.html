@@ -51,10 +51,27 @@
     gap: 2rem;
   }
 
+  .fridgie-icon {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 16px;
+    flex-shrink: 0;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+    transition: transform 0.15s ease;
+  }
+  .fridgie-trigger:hover .fridgie-icon {
+    transform: scale(1.05) rotate(-3deg);
+  }
+
   .fridgie-text {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    flex: 1;
+    text-align: center;
+    align-items: center;
   }
 
   .fridgie-headline {
@@ -89,8 +106,10 @@
   }
 
   @media (max-width: 600px) {
-    .fridgie-trigger { padding: 1.2rem 1.5rem; }
-    .fridgie-btn-img { height: 44px; }
+    .fridgie-trigger { padding: 1rem 1rem; }
+    .fridgie-btn-img { height: 40px; }
+    .fridgie-icon { height: 52px; width: 52px; border-radius: 10px; }
+    .fridgie-headline { font-size: 1.1rem; }
   }
 
   body {
@@ -1051,9 +1070,10 @@
 <!-- FRIDGIE TRIGGER HEADER -->
 <a href="https://FridgieSmalls.app" target="_blank" rel="noopener" class="fridgie-trigger" id="fridgeTrigger">
   <div class="fridgie-trigger-inner">
+    <img src="fridgieSmallsIconLogo.png" alt="FridgieSmalls" class="fridgie-icon">
     <div class="fridgie-text">
       <span class="fridgie-headline" id="fridgeHeadline">What if tonight's dinner cost you nothing?</span>
-      <span class="fridgie-sub" id="fridgeSub">Visit Fridgie. Use what you already have.</span>
+      <span class="fridgie-sub" id="fridgeSub">Click for Fridgie. Use what you already have.</span>
     </div>
     <img src="fridgieButton.png" alt="FridgieSmalls.app" class="fridgie-btn-img">
   </div>
