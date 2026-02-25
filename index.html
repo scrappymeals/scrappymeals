@@ -25,6 +25,79 @@
 
   html { scroll-behavior: smooth; }
 
+  /* ── FRIDGIE TRIGGER HEADER ── */
+  .fridgie-trigger {
+    display: block;
+    width: 100%;
+    background: #f5c842;
+    color: #1a1200;
+    text-decoration: none;
+    padding: 1.6rem 3rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 300;
+    transition: background 0.2s;
+    border: none;
+    text-align: left;
+  }
+  .fridgie-trigger:hover { background: #ffd84a; }
+
+  .fridgie-trigger-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+
+  .fridgie-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .fridgie-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #1a1200;
+  }
+
+  .fridgie-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(26,18,0,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  .fridgie-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a1200;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(26,18,0,0.25);
+    padding: 0.7rem 1.4rem;
+    transition: border-color 0.2s;
+  }
+  .fridgie-trigger:hover .fridgie-cta { border-color: rgba(26,18,0,0.6); }
+  .fridgie-cta::after { content: '↗'; font-size: 0.9rem; }
+
+  @media (max-width: 600px) {
+    .fridgie-trigger { padding: 1.2rem 1.5rem; }
+    .fridgie-cta { display: none; }
+  }
+
   body {
     background: var(--black);
     color: var(--white);
@@ -129,6 +202,7 @@
     padding: 0 3rem;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 0;
   }
 
   /* XR grid background */
@@ -979,6 +1053,17 @@
 </head>
 <body>
 
+<!-- FRIDGIE TRIGGER HEADER -->
+<a href="https://FridgieSmalls.app" target="_blank" rel="noopener" class="fridgie-trigger" id="fridgeTrigger">
+  <div class="fridgie-trigger-inner">
+    <div class="fridgie-text">
+      <span class="fridgie-headline" id="fridgeHeadline">What if tonight's dinner cost you nothing?</span>
+      <span class="fridgie-sub" id="fridgeSub">Talk to Fridgie. Use what you already have.</span>
+    </div>
+    <span class="fridgie-cta">Open FridgieSmalls.app</span>
+  </div>
+</a>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
@@ -1320,6 +1405,41 @@
 </footer>
 
 <script>
+  // Time-aware FridgieSmalls headline
+  (function() {
+    const h = new Date().getHours();
+    let headline, sub;
+
+    if (h >= 0 && h < 3) {
+      headline = "What if your late night snack was already in your fridge?";
+      sub = "Fridgie knows what you have. Open FridgieSmalls.app.";
+    } else if (h >= 3 && h < 6) {
+      headline = "Up early? What if breakfast made itself?";
+      sub = "Fridgie finds recipes from what you already have.";
+    } else if (h >= 6 && h < 10) {
+      headline = "What if this morning's breakfast cost you nothing?";
+      sub = "Scan your fridge. Fridgie handles the rest.";
+    } else if (h >= 10 && h < 12) {
+      headline = "What if brunch was hiding in your fridge right now?";
+      sub = "Fridgie turns what you have into something worth eating.";
+    } else if (h >= 12 && h < 14) {
+      headline = "What if today's lunch cost you nothing?";
+      sub = "Talk to Fridgie. Use what you already have.";
+    } else if (h >= 14 && h < 17) {
+      headline = "What if the perfect afternoon bite was already home?";
+      sub = "Fridgie finds the recipe. You do the easy part.";
+    } else if (h >= 17 && h < 20) {
+      headline = "What if tonight's dinner cost you nothing?";
+      sub = "Stop wondering what to make. Start cooking.";
+    } else {
+      headline = "What if tonight's dinner cost you nothing?";
+      sub = "Talk to Fridgie below. Use what you already have.";
+    }
+
+    document.getElementById('fridgeHeadline').textContent = headline;
+    document.getElementById('fridgeSub').textContent = sub;
+  })();
+
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
