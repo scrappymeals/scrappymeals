@@ -157,69 +157,13 @@
     z-index: 9998;
   }
 
-  /* ── NAV ── */
-  nav {
-    position: relative;
-    top: auto; left: auto; right: auto;
-    z-index: 200;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    background: rgba(6,6,8,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    margin: 0;
-  }
+  body { padding-top: 0; margin-top: 0; }
 
-  body { padding-top: 0; }
+  .hero { margin-top: 58px; }
 
-  .nav-logo {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    text-decoration: none;
+  @media (max-width: 600px) {
+    .hero { margin-top: 52px; }
   }
-  .nav-logo-main {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-    color: var(--white);
-  }
-  .nav-logo-tag {
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 0.2rem 0.4rem;
-    line-height: 1;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--dim);
-    text-decoration: none;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-
-  .nav-cta {
-    background: var(--accent);
-    color: var(--black) !important;
-    padding: 0.5rem 1.2rem !important;
-    font-weight: 500 !important;
-    opacity: 1 !important;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--white) !important; color: var(--black) !important; }
 
   /* ── HERO ── */
   .hero {
@@ -258,7 +202,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding-bottom: 5rem;
-    padding-top: 5rem;
+    padding-top: 3rem;
     position: relative;
     z-index: 2;
   }
@@ -1091,21 +1035,6 @@
     <img src="fridgieButton.png" alt="FridgieSmalls.app" class="fridgie-btn-img">
   </div>
 </a>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-main">Scrappy Meals</span>
-    <span class="nav-logo-tag">XR</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#ar-menus">AR Menus</a></li>
-    <li><a href="#gamify">Gamify</a></li>
-    <li><a href="#waste">Zero Waste</a></li>
-    <li><a href="#universe">Universe</a></li>
-    <li><a href="#restaurants" class="nav-cta">For Restaurants</a></li>
-  </ul>
-</nav>
 
 <!-- HERO -->
 <section class="hero">
