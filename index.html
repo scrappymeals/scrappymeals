@@ -34,11 +34,15 @@
     text-decoration: none;
     padding: 1.6rem 3rem;
     cursor: pointer;
-    position: relative;
-    z-index: 300;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
     transition: background 0.2s;
     border: none;
     text-align: left;
+    border-bottom: 2px solid rgba(26,18,0,0.15);
   }
   .fridgie-trigger:hover { background: #ffd84a; }
 
@@ -149,17 +153,19 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+    position: relative;
+    top: auto; left: auto; right: auto;
     z-index: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.4rem 3rem;
-    background: rgba(6,6,8,0.7);
+    background: rgba(6,6,8,0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
+
+  body { padding-top: 0; }
 
   .nav-logo {
     display: flex;
