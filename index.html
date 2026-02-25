@@ -159,12 +159,6 @@
 
   body { padding-top: 0; margin-top: 0; }
 
-  .hero { margin-top: 58px; }
-
-  @media (max-width: 600px) {
-    .hero { margin-top: 52px; }
-  }
-
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
@@ -1361,38 +1355,27 @@
   </div>
 </footer>
 
+<audio id="bgAudio" loop preload="auto" muted>
+  <source src="MaskOff.mp4" type="audio/mp4">
+</audio>
+
+<button id="muteBtn" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:998;background:rgba(10,10,15,0.85);border:1px solid #1c1d24;color:#00e5a0;font-size:1rem;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);" title="Toggle music">
+  <span id="muteIcon">♪</span>
+</button>
+
 <script>
-  // Time-aware FridgieSmalls headline
+  // Time-aware headline
   (function() {
     const h = new Date().getHours();
     let headline, sub;
-
-    if (h >= 0 && h < 3) {
-      headline = "What if your late night snack was already in your fridge?";
-      sub = "Fridgie knows what you have. Open FridgieSmalls.app.";
-    } else if (h >= 3 && h < 6) {
-      headline = "Up early? What if breakfast made itself?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else if (h >= 6 && h < 10) {
-      headline = "What if this morning's breakfast cost you nothing?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else if (h >= 10 && h < 12) {
-      headline = "What if brunch was hiding in your fridge right now?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else if (h >= 12 && h < 14) {
-      headline = "What if today's lunch cost you nothing?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else if (h >= 14 && h < 17) {
-      headline = "What if the perfect afternoon bite was already home?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else if (h >= 17 && h < 20) {
-      headline = "What if tonight's dinner cost you nothing?";
-      sub = "Click for Fridgie. Use what you have.";
-    } else {
-      headline = "What if tonight's dinner cost you nothing?";
-      sub = "Click for Fridgie. Use what you have.";
-    }
-
+    if      (h < 3)  { headline = "What if your late night snack was already in your fridge?"; }
+    else if (h < 6)  { headline = "Up early? What if breakfast made itself?"; }
+    else if (h < 10) { headline = "What if this morning's breakfast cost you nothing?"; }
+    else if (h < 12) { headline = "What if brunch was hiding in your fridge right now?"; }
+    else if (h < 14) { headline = "What if today's lunch cost you nothing?"; }
+    else if (h < 17) { headline = "What if the perfect afternoon bite was already home?"; }
+    else             { headline = "What if tonight's dinner cost you nothing?"; }
+    sub = "Click for Fridgie. Use what you have.";
     document.getElementById('fridgeHeadline').textContent = headline;
     document.getElementById('fridgeSub').textContent = sub;
   })();
@@ -1408,26 +1391,44 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Scroll-triggered audio
+  // Dynamic padding for fixed bar
+  function setBodyOffset() {
+    const bar = document.getElementById('fridgeTrigger');
+    if (bar) document.body.style.paddingTop = bar.offsetHeight + 'px';
+  }
+  setBodyOffset();
+  window.addEventListener('resize', setBodyOffset);
+
+  // Audio
   const audio = document.getElementById('bgAudio');
   const muteBtn = document.getElementById('muteBtn');
   const muteIcon = document.getElementById('muteIcon');
   let audioStarted = false;
 
   function startAudio() {
-    if (!audioStarted) {
-      audioStarted = true;
-      audio.volume = 0.4;
-      audio.play().catch(() => {});
-      window.removeEventListener('scroll', startAudio);
-    }
+    if (audioStarted) return;
+    audioStarted = true;
+    audio.muted = false;
+    audio.volume = 0.4;
+    audio.play().then(() => {
+      muteIcon.textContent = '♫';
+    }).catch(() => {
+      muteBtn.style.borderColor = '#ff6b35';
+      audioStarted = false;
+    });
+    window.removeEventListener('scroll', startAudio);
+    window.removeEventListener('touchstart', startAudio);
   }
 
   window.addEventListener('scroll', startAudio, { passive: true });
+  window.addEventListener('touchstart', startAudio, { passive: true });
 
-  muteBtn.addEventListener('click', () => {
-    if (audio.muted) {
+  muteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!audioStarted) { startAudio(); return; }
+    if (audio.muted || audio.paused) {
       audio.muted = false;
+      audio.play();
       muteIcon.textContent = '♫';
     } else {
       audio.muted = true;
@@ -1435,33 +1436,5 @@
     }
   });
 </script>
-
-<!-- AUDIO -->
-<audio id="bgAudio" loop preload="auto">
-  <source src="MaskOff.mp4" type="audio/mp4">
-</audio>
-
-<!-- MUTE TOGGLE -->
-<button id="muteBtn" style="
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 998;
-  background: rgba(10,10,15,0.85);
-  border: 1px solid #1c1d24;
-  color: #00e5a0;
-  font-size: 1rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(8px);
-  transition: border-color 0.2s, color 0.2s;
-" title="Toggle music">
-  <span id="muteIcon">♫</span>
-</button>
 </body>
 </html>
