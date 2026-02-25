@@ -74,28 +74,23 @@
     letter-spacing: 0.05em;
   }
 
-  .fridgie-cta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #1a1200;
-    white-space: nowrap;
+  .fridgie-btn-img {
+    height: 64px;
+    width: auto;
+    display: block;
     flex-shrink: 0;
-    border: 1.5px solid rgba(26,18,0,0.25);
-    padding: 0.7rem 1.4rem;
-    transition: border-color 0.2s;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    image-rendering: pixelated;
   }
-  .fridgie-trigger:hover .fridgie-cta { border-color: rgba(26,18,0,0.6); }
-  .fridgie-cta::after { content: '↗'; font-size: 0.9rem; }
+  .fridgie-trigger:hover .fridgie-btn-img {
+    transform: scale(1.05) translateY(-2px);
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+  }
 
   @media (max-width: 600px) {
     .fridgie-trigger { padding: 1.2rem 1.5rem; }
-    .fridgie-cta { display: none; }
+    .fridgie-btn-img { height: 44px; }
   }
 
   body {
@@ -1060,7 +1055,7 @@
       <span class="fridgie-headline" id="fridgeHeadline">What if tonight's dinner cost you nothing?</span>
       <span class="fridgie-sub" id="fridgeSub">Talk to Fridgie. Use what you already have.</span>
     </div>
-    <span class="fridgie-cta">Open FridgieSmalls.app</span>
+    <img src="fridgieButton.png" alt="FridgieSmalls.app" class="fridgie-btn-img">
   </div>
 </a>
 
